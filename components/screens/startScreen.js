@@ -1,9 +1,23 @@
 import { Text, TextInput, View, Button, StyleSheet } from 'react-native';
 import Checkbox from 'expo-checkbox';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 export default function StartScreen(props) {
+    const [name, setName] = useState('');
+    const [number, setNumber] = useState('');
     const [isChecked, setChecked] = useState(false);
+
+    function resetGame() {
+        props.setName('');
+        props.setNumber('');
+        setChecked(false);
+    }
+
+    function startGame() {
+        if (isChecked) {
+            props.setIsStarted(true);
+        }
+    }
 
     return (
         <View style={styles.container}>
@@ -27,10 +41,20 @@ export default function StartScreen(props) {
                 color={isChecked ? '#4630EB' : undefined}
             />
             <Text style={styles.label}>I am not a robot</Text>
-            <Button
-                title="Start"
-                onPress={() => props.startGame()}
-            />
+            <View style={styles.buttonContainer}>
+                <View style={styles.button}>
+                    <Button
+                        title="Reset"
+                        onPress={resetGame}
+                    />
+                </View>
+                <View style={styles.button}>
+                    <Button
+                        title="Confirm"
+                        onPress={startGame}
+                    />
+                </View>
+            </View>
         </View>
     );
 }
@@ -56,5 +80,13 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderWidth: 1,
         marginBottom: 20,
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: 200,
+    },
+    button: {
+        width: 100,
     },
 });
