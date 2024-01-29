@@ -2,6 +2,7 @@ import { Text, TextInput, View, Button, StyleSheet } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import React, { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
+import * as colors from './color.js';
 
 export default function StartScreen(props) {
     const [name, setName] = useState('');
@@ -45,7 +46,7 @@ export default function StartScreen(props) {
 
     return (
         <LinearGradient
-            colors={['#C5B4E3', 'transparent']}
+            colors={[colors.backgroundGradientStart, colors.backgroundGradientEnd]}
             style={styles.background}>
             <View style={styles.container}>
                 <Text style={styles.title}>Guess My Number</Text>
@@ -69,19 +70,19 @@ export default function StartScreen(props) {
                             style={styles.checkbox}
                             value={isChecked}
                             onValueChange={setChecked}
-                            color={isChecked ? '#4630EB' : undefined}
+                            color={isChecked ? colors.checkboxColor : undefined}
                         />
                         <Text style={styles.label}>I am not a robot</Text>
                     </View>
                     <View style={styles.buttonContainer}>
                         <View style={styles.button}>
-                            <Button color={'red'}
+                            <Button color={colors.buttonResetColor}
                                 title="Reset"
                                 onPress={resetGame}
                             />
                         </View>
                         <View style={styles.button}>
-                            <Button color={'blue'}
+                            <Button color={colors.buttonConfirmColor}
                                 title="Confirm"
                                 onPress={startGame}
                             />
@@ -102,24 +103,24 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         width: '100%',
-        color: '#C5B4E3',
+        color: colors.primaryPurple,
     },
     card: {
-        backgroundColor: '#D3D3D3',
+        backgroundColor: colors.cardBackground,
         borderRadius: 10,
         padding: 20,
         margin: 20,
     },
     title: {
         fontSize: 28,
-        color: 'purple',
+        color: colors.titleColor,
         marginBottom: 20,
         alignSelf: 'center',
     },
     text: {
         fontSize: 20,
         marginBottom: 10,
-        color: 'purple',
+        color: colors.labelColor,
     },
     errorText: {
         fontSize: 16,
@@ -129,7 +130,10 @@ const styles = StyleSheet.create({
     textInput: {
         height: 40,
         width: 200,
-        borderColor: 'purple',
+        color: colors.primaryPurple,
+        fontWeight: 'bold',
+        fontSize: 20,
+        borderColor: colors.textInputBorderColor,
         marginBottom: 20,
         borderBottomWidth: 1,
         paddingHorizontal: 10,

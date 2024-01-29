@@ -1,0 +1,11 @@
+export const primaryPurple = '#8a2be2';
+export const backgroundGradientStart = '#C5B4E3';
+export const backgroundGradientEnd = 'transparent';
+export const cardBackground = '#a6a6a6';
+export const titleColor = 'purple';
+export const textInputBorderColor = 'purple';
+export const buttonResetColor = 'red';
+export const buttonConfirmColor = 'blue';
+export const labelColor = 'purple';
+export const errorTextColor = 'black';
+export const checkboxColor = '#4630EB';
