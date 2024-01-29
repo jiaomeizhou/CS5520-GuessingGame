@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as colors from './color.js';
 
-export default function StartScreen(props) {
+export default function StartScreen({onStartGame}) {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
     const [isChecked, setChecked] = useState(false);
@@ -30,18 +30,18 @@ export default function StartScreen(props) {
         setNumber(number);
     }
 
+    function confirmData() {
+        if (isChecked && nameError === '' && numberError === '') {
+            onStartGame(name, number);
+        }
+    }
+
     function resetGame() {
         setName('');
         setNumber('');
         setChecked(false);
         setNameError('');
         setNumberError('');
-    }
-
-    function startGame() {
-        if (isChecked && nameError === '' && numberError === '') {
-            setIsStarted(true);
-        }
     }
 
     return (
@@ -55,14 +55,14 @@ export default function StartScreen(props) {
                     <TextInput
                         style={styles.textInput}
                         onChangeText={setNameHandler}
-                        value={props.name}
+                        value={name}
                     />
                     {nameError !== '' && <Text style={styles.errorText}>{nameError}</Text>}
                     <Text style={styles.text}>Enter a Number</Text>
                     <TextInput
                         style={styles.textInput}
                         onChangeText={setNumberHandler}
-                        value={props.number}
+                        value={number}
                     />
                     {numberError !== '' && <Text style={styles.errorText}>{numberError}</Text>}
                     <View style={styles.checkboxContainer}>
@@ -84,7 +84,8 @@ export default function StartScreen(props) {
                         <View style={styles.button}>
                             <Button color={colors.buttonConfirmColor}
                                 title="Confirm"
-                                onPress={startGame}
+                                onPress={confirmData}
+                                disabled={!isChecked}
                             />
                         </View>
                     </View>
