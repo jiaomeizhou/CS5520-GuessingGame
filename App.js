@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import StartScreen from './components/screens/startScreen';
-import GameScreen from './components/screens/gameScreen';
-import FinalScreen from './components/screens/finalScreen';
+import StartScreen from './screens/startScreen';
+import GameScreen from './screens/gameScreen';
+import FinalScreen from './screens/finalScreen';
 import React, { useState } from 'react';
 
 export default function App() {
@@ -20,27 +20,32 @@ export default function App() {
     setNumber(number);
   }
 
-  function updateNumberToGuessHandler() {
-    if (attempts === 0 || isGameOver) {
-      setNumberToGuess(Math.floor(Math.random() * 10) + 1020);
-    }
+  function generateNumberToGuess() {
+    setNumberToGuess(Math.floor(Math.random() * 10) + 1020);
   }
 
   function startGameHandler(name, number) {
     setName(name);
     setNumber(number);
     setIsGameStarted(true);
+    setNumberToGuess(Math.floor(Math.random() * 10) + 1020);
     console.log('Game started');
+    console.log(name, number);
+    console.log(numberToGuess);
   }
 
   function continueGameHandler() {
     setIsGameStarted(false);
     setIsGameOver(false);
     setNumber('');
-    setAttempts(2);
   }
 
   function gameOverHandler() {
+    setAttempts(2);
+    setName('');
+    setNumber('');
+    setNumberToGuess(Math.floor(Math.random() * 10) + 1020);
+    setIsWin(false);
     setIsGameOver(true);
     setIsGameStarted(false);
   }
@@ -48,6 +53,9 @@ export default function App() {
   function restartGameHandler() {
     setIsGameStarted(false);
     setIsGameOver(false);
+    setNumber('');
+    setAttempts(2);
+    setNumberToGuess(Math.floor(Math.random() * 10) + 1020);
   }
 
   if (!isGameStarted && !isGameOver) {
@@ -62,7 +70,15 @@ export default function App() {
   if (isGameStarted && !isGameOver) {
     return (
       <View style={styles.container}>
-        <GameScreen receiveData={receiveData} onStartGame={startGameHandler} onFinish={gameOverHandler} onContinue={continueGameHandler} />
+        <GameScreen
+          name={name}
+          number={number}
+          numberToGuess={numberToGuess}
+          receiveData={receiveData}
+          onStart={startGameHandler}
+          onFinish={gameOverHandler}
+          onContinue={continueGameHandler}
+          generateNumberToGuess={generateNumberToGuess} />
         <StatusBar style="auto" />
       </View>
     );
