@@ -30,14 +30,16 @@ export default function App() {
     setIsGameStarted(true);
     setNumberToGuess(Math.floor(Math.random() * 10) + 1020);
     console.log('Game started');
-    console.log(name, number);
-    console.log(numberToGuess);
+    console.log('name+number:' + name, number);
   }
 
-  function continueGameHandler() {
+  function continueGameHandler(name, number, numberToGuess) {
+    setName(name);
+    setNumber(number);
+    setNumberToGuess(numberToGuess);
     setIsGameStarted(false);
     setIsGameOver(false);
-    setNumber('');
+    console.log('Game continued');
   }
 
   function gameOverHandler() {
@@ -48,6 +50,7 @@ export default function App() {
     setIsWin(false);
     setIsGameOver(true);
     setIsGameStarted(false);
+    console.log('Game over');
   }
 
   function restartGameHandler() {
@@ -56,12 +59,13 @@ export default function App() {
     setNumber('');
     setAttempts(2);
     setNumberToGuess(Math.floor(Math.random() * 10) + 1020);
+    console.log('Game restarted');
   }
 
   if (!isGameStarted && !isGameOver) {
     return (
       <View style={styles.container}>
-        <StartScreen onStartGame={startGameHandler} />
+        <StartScreen onStart={startGameHandler} />
         <StatusBar style="auto" />
       </View>
     );
