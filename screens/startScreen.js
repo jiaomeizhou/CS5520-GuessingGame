@@ -1,38 +1,43 @@
 import { Text, TextInput, View, Button, StyleSheet } from 'react-native';
 import Checkbox from 'expo-checkbox';
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import * as colors from './color.js';
+import * as colors from '../components/color.js';
 
-export default function StartScreen({onStartGame}) {
-    const [name, setName] = useState('');
-    const [number, setNumber] = useState('');
+export default function StartScreen({onStart, initialName, initialNumber}) {
+    const [name, setName] = useState(initialName ||'');
+    const [number, setNumber] = useState(initialNumber || '');
     const [isChecked, setChecked] = useState(false);
     const [nameError, setNameError] = useState('');
     const [numberError, setNumberError] = useState(false);
 
-    function setNameHandler(name) {
-        if (!/^[a-zA-Z]+$/.test(name) || name.length <= 0) {
+    useEffect(() => {
+        setName(initialName || '');
+        setNumber(initialNumber || '');
+      }, [initialName, initialNumber]);
+
+    function setNameHandler(inputName) {
+        if (!/^[a-zA-Z]+$/.test(inputName) || inputName.length <= 0) {
             setNameError('Please enter a valid name');
         } else {
             setNameError('');
         }
-        setName(name);
+        setName(inputName);
     }
 
-    function setNumberHandler(number) {
-        const parsedNumber = parseInt(number);
-        if (isNaN(number) || number.length <= 0 || parsedNumber < 1020 || parsedNumber > 1029) {
+    function setNumberHandler(inputNumber) {
+        const parsedNumber = parseInt(inputNumber);
+        if (isNaN(inputNumber) || inputNumber.length <= 0 || parsedNumber < 1020 || parsedNumber > 1029) {
             setNumberError('Please enter a valid number');
         } else {
             setNumberError('');
         }
-        setNumber(number);
+        setNumber(inputNumber);
     }
 
     function confirmData() {
         if (isChecked && nameError === '' && numberError === '') {
-            onStartGame(name, number);
+            onStart(name, number);
         }
     }
 
