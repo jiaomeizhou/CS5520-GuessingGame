@@ -1,20 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { View, Text, Modal, Button, StyleSheet, Image} from 'react-native';
 
-export default function FinalScreen({ isWin, number, onRestart }) {
+export default function FinalScreen({ number, numberToGuess, onRestart }) {
+    const [isWin, setIsWin] = useState(false);
 
-    console.log("isWin:" + isWin);
+    useEffect(() => {
+        setGameWin();
+    }, []);
+
+    function setGameWin() {
+        if (number === numberToGuess.toString()) {
+            setIsWin(true);
+        }
+    }
+
+    console.log(number, numberToGuess, isWin);
     const handleRestart = () => {
         onRestart();
     };
 
-    const correctNumber = parseInt(number);
+    const correctNumber = parseInt(numberToGuess);
 
     const getImageUrl = () => {
+
         if (isWin) {
             // Construct URL based on the chosen number
             return `https://picsum.photos/id/${correctNumber}/100/100`;
-            console.log(`https://picsum.photos/id/${correctNumber}/100/100`);
         } else {
             return require('../assets/sad.jpeg');
         }
