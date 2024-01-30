@@ -48,6 +48,7 @@ export default function App() {
     setIsGameStarted(false);
     setIsGameOver(false);
     setAttemptsLeft(3);
+    setName('');
     setNumber('');
     console.log('Game restarted');
   }
@@ -63,7 +64,11 @@ export default function App() {
   if (!isGameStarted && !isGameOver && attemptsLeft > 0) {
     return (
       <View style={styles.container}>
-        <StartScreen onStart={startGameHandler} />
+        <StartScreen
+          onStart={startGameHandler}
+          initialName={name}
+          initialNumber={number}
+        />
         <StatusBar style="auto" />
       </View>
     );
@@ -71,17 +76,17 @@ export default function App() {
 
   if (isGameStarted && !isGameOver && attemptsLeft > 0) {
     return (
-        <View style={styles.container}>
-          <GameScreen
-            name={name}
-            number={number}
-            numberToGuess={numberToGuess}
-            attemptsLeft={attemptsLeft}
-            modalVisible={isGameStarted}
-            onContinue={continueGameHandler}
-            onFinish={gameResultHandler} />
-          <StatusBar style="auto" />
-        </View>
+      <View style={styles.container}>
+        <GameScreen
+          name={name}
+          number={number}
+          numberToGuess={numberToGuess}
+          attemptsLeft={attemptsLeft}
+          modalVisible={isGameStarted}
+          onContinue={continueGameHandler}
+          onFinish={gameResultHandler} />
+        <StatusBar style="auto" />
+      </View>
     );
   }
 

@@ -36,7 +36,7 @@ export default function FinalScreen({ number, numberToGuess, onRestart }) {
 
 
     return (
-        <Modal visible={true}>
+        // <Modal visible={true}>
             <View style={styles.container}>
                 {/* <Text style={styles.title}>Game is over</Text> */}
                 <Header gameStarted={false} />
@@ -53,7 +53,7 @@ export default function FinalScreen({ number, numberToGuess, onRestart }) {
                     </View>
                 </Card>
             </View>
-        </Modal>
+        // </Modal>
     );
 }
 

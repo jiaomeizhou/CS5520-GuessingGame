@@ -16,7 +16,10 @@ export default function StartScreen({onStart, initialName, initialNumber}) {
     useEffect(() => {
         setName(initialName);
         setNumber(initialNumber);
+        setChecked(false);
       }, [initialName, initialNumber]);
+
+      console.log("initialName:" + initialName);
 
     function setNameHandler(inputName) {
         if (!/^[a-zA-Z]+$/.test(inputName) || inputName.length <= 0) {
@@ -140,6 +143,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         borderBottomWidth: 1,
         paddingHorizontal: 10,
+        textAlign: 'center',
     },
     buttonContainer: {
         flexDirection: 'row',
