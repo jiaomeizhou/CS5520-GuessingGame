@@ -51,7 +51,7 @@ export default function GameScreen({ name, number, numberToGuess, attemptsLeft, 
                     ) : (
                         <>
                             <Button title="I am done" onPress={onFinish} />
-                            <Button title="Let me guess again" onPress={continueGameHandler} disabled={attemptsLeft <= 1} />
+                            <Button title="Let me guess again" onPress={continueGameHandler} disabled={attemptsLeft < 1} />
                         </>
                     )}
                 </View>

@@ -3,6 +3,7 @@ import Checkbox from 'expo-checkbox';
 import React, { useState, useEffect} from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as colors from '../components/color.js';
+import Header from '../components/Header';
 
 export default function StartScreen({onStart, initialName, initialNumber}) {
     const [name, setName] = useState(initialName);
@@ -54,7 +55,8 @@ export default function StartScreen({onStart, initialName, initialNumber}) {
             colors={[colors.backgroundGradientStart, colors.backgroundGradientEnd]}
             style={styles.background}>
             <View style={styles.container}>
-                <Text style={styles.title}>Guess My Number</Text>
+                <Header gameStarted={true} />
+                {/* <Text style={styles.title}>Guess My Number</Text> */}
                 <View style={styles.card}>
                     <Text style={styles.text}>Name</Text>
                     <TextInput

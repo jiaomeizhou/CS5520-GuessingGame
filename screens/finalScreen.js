@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { View, Text, Modal, Button, StyleSheet, Image} from 'react-native';
+import Header from '../components/Header';
 
 export default function FinalScreen({ number, numberToGuess, onRestart }) {
     const [isWin, setIsWin] = useState(false);
@@ -35,7 +36,8 @@ export default function FinalScreen({ number, numberToGuess, onRestart }) {
     return (
         <Modal visible={true}>
             <View style={styles.container}>
-                <Text style={styles.title}>Game is over</Text>
+                {/* <Text style={styles.title}>Game is over</Text> */}
+                <Header gameStarted={false} />
                 <View style={styles.card}>
                     <Text>Here's your picture</Text>
                     {isWin ? (
