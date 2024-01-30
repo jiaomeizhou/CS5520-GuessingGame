@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, Button, StyleSheet } from 'react-native';
 import * as colors from '../components/color.js';
 
-export default function GameScreen({ name, number, numberToGuess, attemptsLeft, onContinue, onFinish }) {
+export default function GameScreen({ name, number, numberToGuess, attemptsLeft, onContinue, onFinish, }) {
     const [feedback, setFeedback] = useState('');
     const [isWin, setIsWin] = useState(false);
 
     useEffect(() => {
         if (numberToGuess !== undefined) {
-            guessHandler();
+            guessHandler(attemptsLeft - 1);
         }
     }, [numberToGuess]);
 
@@ -39,7 +39,7 @@ export default function GameScreen({ name, number, numberToGuess, attemptsLeft, 
 
     function onFinishCallback(isWin) {
         onFinish(isWin); // Pass the result to App.js
-      }
+    }
 
     return (
         <Modal visible={true}>
@@ -51,9 +51,7 @@ export default function GameScreen({ name, number, numberToGuess, attemptsLeft, 
                     ) : (
                         <>
                             <Button title="I am done" onPress={onFinish} />
-                            {attemptsLeft > 0 && (
-                                <Button title="Let me guess again" onPress={continueGameHandler} />
-                            )}
+                            <Button title="Let me guess again" onPress={continueGameHandler} disabled={attemptsLeft <= 1} />
                         </>
                     )}
                 </View>

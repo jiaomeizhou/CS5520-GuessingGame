@@ -5,15 +5,15 @@ import { LinearGradient } from 'expo-linear-gradient';
 import * as colors from '../components/color.js';
 
 export default function StartScreen({onStart, initialName, initialNumber}) {
-    const [name, setName] = useState(initialName ||'');
-    const [number, setNumber] = useState(initialNumber || '');
+    const [name, setName] = useState(initialName);
+    const [number, setNumber] = useState(initialNumber);
     const [isChecked, setChecked] = useState(false);
     const [nameError, setNameError] = useState('');
     const [numberError, setNumberError] = useState(false);
 
     useEffect(() => {
-        setName(initialName || '');
-        setNumber(initialNumber || '');
+        setName(initialName);
+        setNumber(initialNumber);
       }, [initialName, initialNumber]);
 
     function setNameHandler(inputName) {
