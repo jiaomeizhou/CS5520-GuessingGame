@@ -12,7 +12,7 @@ export default function App() {
   const [isGameOver, setIsGameOver] = useState(false);
   const [numberToGuess, setNumberToGuess] = useState(Math.floor(Math.random() * 10) + 1020); // [1020, 1029]
   const [isWin, setIsWin] = useState(false);
-  const [attemptsLeft, setAttemptsLeft] = useState(2);
+  const [attemptsLeft, setAttemptsLeft] = useState(3);
 
 
   function startGameHandler(name, number) {
@@ -33,15 +33,6 @@ export default function App() {
     setIsGameOver(false);
     setAttemptsLeft(attemptsLeft - 1);
     console.log('Game continued');
-  }
-
-  function gameOverHandler() {
-    setAttemptsLeft(2);
-    setName('');
-    setNumber('');
-    setIsGameOver(true);
-    setIsGameStarted(false);
-    console.log('Game over');
   }
 
   function restartGameHandler() {
