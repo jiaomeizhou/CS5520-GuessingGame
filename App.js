@@ -12,38 +12,34 @@ export default function App() {
   const [isGameOver, setIsGameOver] = useState(false);
   const [numberToGuess, setNumberToGuess] = useState(Math.floor(Math.random() * 10) + 1020); // [1020, 1029]
   const [isWin, setIsWin] = useState(false);
-  const [attempts, setAttempts] = useState(2); // [0, 2]
+  const [attemptsLeft, setAttemptsLeft] = useState(2);
 
-  function receiveData(name, number) {
-    console.log(name, number);
-    setName(name);
-    setNumber(number);
-  }
 
-  function generateNumberToGuess() {
-    setNumberToGuess(Math.floor(Math.random() * 10) + 1020);
-  }
+  console.log('initial attempts:' + attemptsLeft)
 
-  function startGameHandler(name, number) {
+  function startGameHandler(name, number, attempts) {
     setName(name);
     setNumber(number);
     setIsGameStarted(true);
     setNumberToGuess(Math.floor(Math.random() * 10) + 1020);
+    setAttemptsLeft(attemptsLeft);
     console.log('Game started');
     console.log('name+number:' + name, number);
+    console.log('attemptsLeft:' + attemptsLeft);
   }
 
-  function continueGameHandler(name, number, numberToGuess) {
+  function continueGameHandler(name, number, numberToGuess, attemptsLeft) {
     setName(name);
     setNumber(number);
     setNumberToGuess(numberToGuess);
     setIsGameStarted(false);
     setIsGameOver(false);
+    setAttemptsLeft(attemptsLeft - 1);
     console.log('Game continued');
   }
 
   function gameOverHandler() {
-    setAttempts(2);
+    setAttemptsLeft(2);
     setName('');
     setNumber('');
     setNumberToGuess(Math.floor(Math.random() * 10) + 1020);
@@ -57,10 +53,11 @@ export default function App() {
     setIsGameStarted(false);
     setIsGameOver(false);
     setNumber('');
-    setAttempts(2);
+    setAttemptsLeft(3);
     setNumberToGuess(Math.floor(Math.random() * 10) + 1020);
     console.log('Game restarted');
   }
+
 
   if (!isGameStarted && !isGameOver) {
     return (
@@ -78,11 +75,9 @@ export default function App() {
           name={name}
           number={number}
           numberToGuess={numberToGuess}
-          receiveData={receiveData}
-          onStart={startGameHandler}
-          onFinish={gameOverHandler}
+          attemptsLeft={attemptsLeft}
           onContinue={continueGameHandler}
-          generateNumberToGuess={generateNumberToGuess} />
+          onFinish={gameOverHandler} />
         <StatusBar style="auto" />
       </View>
     );

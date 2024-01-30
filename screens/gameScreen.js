@@ -1,16 +1,24 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, Button, StyleSheet } from 'react-native';
 import * as colors from '../components/color.js';
 
-export default function GameScreen({ name, number, numberToGuess, onContinue, onFinish}) {
-    const [attempts, setAttempts] = useState(2);
+export default function GameScreen({ name, number, numberToGuess, attemptsLeft, onContinue, onFinish }) {
     const [feedback, setFeedback] = useState('');
-    
+    const [isWin, setIsWin] = useState(false);
+
     useEffect(() => {
         if (numberToGuess !== undefined) {
             guessHandler();
         }
     }, [numberToGuess]);
+
+    function isGameWin() {
+        if (number === numberToGuess.toString()) {
+            setIsWin(true);
+        }
+    }
+
+    console.log("attempt left111:" + attemptsLeft);
 
     function guessHandler() {
         if (number === numberToGuess.toString()) {
@@ -18,24 +26,35 @@ export default function GameScreen({ name, number, numberToGuess, onContinue, on
         } else {
             console.log("correct number:" + numberToGuess);
             const hint = number < numberToGuess ? 'Guess higher!' : 'Guess lower!';
-            setFeedback(`Hello ${name}\nYou have chosen ${number} That's not my number! ${hint} ${attempts > 0 ? `You have ${attempts} attempts left.` : ''}`);
-            setAttempts(attempts - 1);
+            setFeedback(`Hello ${name}\nYou have chosen ${number} That's not my number! ${hint} ${attemptsLeft > 0 ? `You have ${attemptsLeft} attempts left.` : ''}`);
         }
     };
 
-    function continueGameHandler(name, number, numberToGuess) {
-        onContinue(name, number, numberToGuess);
+    function getAttempts() {
+        return attemptsLeft;
     }
 
+    console.log("new attempts:" + attemptsLeft + name + number + numberToGuess);
+
+    function continueGameHandler() {
+        onContinue(name, number, numberToGuess, attemptsLeft);
+    }
 
     return (
         <Modal visible={true}>
             <View style={styles.container}>
-                <View style={styles.card} >
+                <View style={styles.card}>
                     <Text>{feedback}</Text>
-                    <Button title="I am done" onPress={onFinish} />
-                    {attempts > 0 && <Button title="Let me guess again" onPress={continueGameHandler} />}
-                    {!attempts && <Button title="Thank you!" onPress={onFinish} />}
+                    {isWin ? (
+                        <Button title="Thank you!" onPress={onFinish} />
+                    ) : (
+                        <>
+                            <Button title="I am done" onPress={onFinish} />
+                            {attemptsLeft > 0 && (
+                                <Button title="Let me guess again" onPress={continueGameHandler} />
+                            )}
+                        </>
+                    )}
                 </View>
             </View>
         </Modal>
