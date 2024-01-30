@@ -77,6 +77,7 @@ export default function App() {
           number={number}
           numberToGuess={numberToGuess}
           attemptsLeft={attemptsLeft}
+          modalVisible={isGameStarted}
           onContinue={continueGameHandler}
           onFinish={gameResultHandler} />
         <StatusBar style="auto" />

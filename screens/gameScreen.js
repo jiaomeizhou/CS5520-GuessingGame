@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, Button, StyleSheet } from 'react-native';
 import * as colors from '../components/color.js';
 
-export default function GameScreen({ name, number, numberToGuess, attemptsLeft, onContinue, onFinish, }) {
+export default function GameScreen({ name, number, numberToGuess, attemptsLeft, modalVisible, onContinue, onFinish, }) {
     const [feedback, setFeedback] = useState('');
     const [isWin, setIsWin] = useState(false);
 
@@ -27,7 +27,7 @@ export default function GameScreen({ name, number, numberToGuess, attemptsLeft, 
         } else {
             console.log("correct number:" + numberToGuess);
             const hint = number < numberToGuess ? 'Guess higher!' : 'Guess lower!';
-            setFeedback(`Hello ${name}\nYou have chosen ${number} That's not my number! ${hint} ${attemptsLeft > 0 ? `You have ${attemptsLeft} attempts left.` : ''}`);
+            setFeedback(`Hello ${name}\nYou have chosen ${number} That's not my number! ${hint} ${attemptsLeft > 0 ? `You have ${attemptsLeft} attempts left.` : `You have no attempts left.`}`);
         }
     };
 
@@ -42,7 +42,7 @@ export default function GameScreen({ name, number, numberToGuess, attemptsLeft, 
     }
 
     return (
-        <Modal visible={true}>
+        <Modal visible={modalVisible}>
             <View style={styles.container}>
                 <View style={styles.card}>
                     <Text>{feedback}</Text>
