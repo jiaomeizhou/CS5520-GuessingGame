@@ -37,6 +37,10 @@ export default function GameScreen({ name, number, numberToGuess, attemptsLeft, 
         onContinue(name, number, numberToGuess, attemptsLeft);
     }
 
+    function onFinishCallback(isWin) {
+        onFinish(isWin); // Pass the result to App.js
+      }
+
     return (
         <Modal visible={true}>
             <View style={styles.container}>

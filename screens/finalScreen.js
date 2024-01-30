@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
 import { View, Text, Modal, Button, StyleSheet, Image} from 'react-native';
 
-export default function FinalScreen({ isWin, onRestart }) {
+export default function FinalScreen({ isWin, number, onRestart }) {
 
+    console.log("isWin:" + isWin);
     const handleRestart = () => {
         onRestart();
     };
 
+    const correctNumber = parseInt(number);
+
     const getImageUrl = () => {
         if (isWin) {
             // Construct URL based on the chosen number
-            return `https://picsum.photos/id/${chosenNumber}/100/100`;
+            return `https://picsum.photos/id/${correctNumber}/100/100`;
+            console.log(`https://picsum.photos/id/${correctNumber}/100/100`);
         } else {
             return require('../assets/sad.jpeg');
         }
     };
+
 
     return (
         <Modal visible={true}>
@@ -58,6 +63,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     sadFace: {
+        width: 100,
+        height: 100,
+        marginBottom: 20,
+    },
+    image: {
         width: 100,
         height: 100,
         marginBottom: 20,

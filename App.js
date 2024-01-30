@@ -39,7 +39,6 @@ export default function App() {
     setAttemptsLeft(2);
     setName('');
     setNumber('');
-    setIsWin(false);
     setIsGameOver(true);
     setIsGameStarted(false);
     console.log('Game over');
@@ -51,6 +50,12 @@ export default function App() {
     setAttemptsLeft(3);
     setNumber('');
     console.log('Game restarted');
+  }
+
+  function gameResultHandler(isWin) {
+    setIsWin(isWin);
+    setIsGameOver(true);
+    console.log('Game result is win?' + isWin);
   }
 
 
@@ -72,7 +77,7 @@ export default function App() {
           numberToGuess={numberToGuess}
           attemptsLeft={attemptsLeft}
           onContinue={continueGameHandler}
-          onFinish={gameOverHandler} />
+          onFinish={gameResultHandler}/>
         <StatusBar style="auto" />
       </View>
     );
@@ -80,7 +85,10 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <FinalScreen onRestart={restartGameHandler} />
+      <FinalScreen 
+      isWin={isWin}
+      number={number}
+      onRestart={restartGameHandler} />
       <StatusBar style="auto" />
     </View>
   );
