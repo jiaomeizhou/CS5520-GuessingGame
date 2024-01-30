@@ -1,6 +1,7 @@
-import React, { useState, useEffect} from 'react';
-import { View, Text, Modal, Button, StyleSheet, Image} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Modal, Button, StyleSheet, Image } from 'react-native';
 import Header from '../components/Header';
+import Card from '../components/Card';
 
 export default function FinalScreen({ number, numberToGuess, onRestart }) {
     const [isWin, setIsWin] = useState(false);
@@ -38,16 +39,18 @@ export default function FinalScreen({ number, numberToGuess, onRestart }) {
             <View style={styles.container}>
                 {/* <Text style={styles.title}>Game is over</Text> */}
                 <Header gameStarted={false} />
-                <View style={styles.card}>
-                    <Text>Here's your picture</Text>
-                    {isWin ? (
-                        <Image style={styles.image} source={{ uri: getImageUrl() }} />
-                    ) : (
-                        <Image style={styles.sadFace} source={getImageUrl()} />
-                    )}
-                    <Text style={styles.title}>{isWin ? 'You won!' : 'You lost!'}</Text>
-                    <Button title="Start Again" onPress={handleRestart} />
-                </View>
+                <Card>
+                    <View>
+                        <Text>Here's your picture</Text>
+                        {isWin ? (
+                            <Image style={styles.image} source={{ uri: getImageUrl() }} />
+                        ) : (
+                            <Image style={styles.sadFace} source={getImageUrl()} />
+                        )}
+                        <Text style={styles.title}>{isWin ? 'You won!' : 'You lost!'}</Text>
+                        <Button title="Start Again" onPress={handleRestart} />
+                    </View>
+                </Card>
             </View>
         </Modal>
     );

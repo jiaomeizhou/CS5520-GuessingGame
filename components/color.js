@@ -9,3 +9,4 @@ export const buttonConfirmColor = 'blue';
 export const labelColor = 'purple';
 export const errorTextColor = 'black';
 export const checkboxColor = '#4630EB';
+export const shadowColor = '#000';

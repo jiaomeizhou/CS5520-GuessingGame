@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, Button, StyleSheet } from 'react-native';
 import * as colors from '../components/color.js';
+import Card from '../components/Card';
 
 export default function GameScreen({ name, number, numberToGuess, attemptsLeft, modalVisible, onContinue, onFinish, }) {
     const [feedback, setFeedback] = useState('');
@@ -44,17 +45,19 @@ export default function GameScreen({ name, number, numberToGuess, attemptsLeft, 
     return (
         <Modal visible={modalVisible}>
             <View style={styles.container}>
-                <View style={styles.card}>
-                    <Text>{feedback}</Text>
-                    {isWin ? (
-                        <Button title="Thank you!" onPress={onFinish} />
-                    ) : (
-                        <>
-                            <Button title="I am done" onPress={onFinish} />
-                            <Button title="Let me guess again" onPress={continueGameHandler} disabled={attemptsLeft < 1} />
-                        </>
-                    )}
-                </View>
+                <Card>
+                    <View style={styles.card}>
+                        <Text>{feedback}</Text>
+                        {isWin ? (
+                            <Button title="Thank you!" onPress={onFinish} />
+                        ) : (
+                            <>
+                                <Button title="I am done" onPress={onFinish} />
+                                <Button title="Let me guess again" onPress={continueGameHandler} disabled={attemptsLeft < 1} />
+                            </>
+                        )}
+                    </View>
+                </Card>
             </View>
         </Modal>
     );

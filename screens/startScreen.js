@@ -4,6 +4,7 @@ import React, { useState, useEffect} from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as colors from '../components/color.js';
 import Header from '../components/Header';
+import Card from '../components/Card';
 
 export default function StartScreen({onStart, initialName, initialNumber}) {
     const [name, setName] = useState(initialName);
@@ -57,7 +58,7 @@ export default function StartScreen({onStart, initialName, initialNumber}) {
             <View style={styles.container}>
                 <Header gameStarted={true} />
                 {/* <Text style={styles.title}>Guess My Number</Text> */}
-                <View style={styles.card}>
+                <Card>
                     <Text style={styles.text}>Name</Text>
                     <TextInput
                         style={styles.textInput}
@@ -96,7 +97,7 @@ export default function StartScreen({onStart, initialName, initialNumber}) {
                             />
                         </View>
                     </View>
-                </View>
+                </Card>
             </View>
         </LinearGradient>
     );
@@ -112,12 +113,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '100%',
         color: colors.primaryPurple,
-    },
-    card: {
-        backgroundColor: colors.cardBackground,
-        borderRadius: 10,
-        padding: 20,
-        margin: 20,
     },
     title: {
         fontSize: 28,
