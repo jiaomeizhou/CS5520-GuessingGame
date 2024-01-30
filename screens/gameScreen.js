@@ -46,17 +46,17 @@ export default function GameScreen({ name, number, numberToGuess, attemptsLeft, 
         <Modal visible={modalVisible}>
             <View style={styles.container}>
                 <Card>
-                <View >
-                    <Text style={styles.text}>{feedback}</Text>
-                    {isWin ? (
-                        <Button title="Thank you!" onPress={onFinish} />
-                    ) : (
-                        <>
-                            <Button title="I am done" onPress={onFinish} />
-                            <Button title="Let me guess again" onPress={continueGameHandler} disabled={attemptsLeft <= 1} />
-                        </>
-                    )}
-                </View>
+                    <View >
+                        <Text style={styles.text}>{feedback}</Text>
+                        {isWin ? (
+                            <Button title="Thank you!" onPress={onFinish} />
+                        ) : (
+                            <>
+                                <Button title="I am done" onPress={onFinish} />
+                                <Button title="Let me guess again" onPress={continueGameHandler} disabled={attemptsLeft <= 1} />
+                            </>
+                        )}
+                    </View>
                 </Card>
             </View>
         </Modal>
@@ -66,7 +66,9 @@ export default function GameScreen({ name, number, numberToGuess, attemptsLeft, 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 100,
+        backgroundColor: '#C5B4E3',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     background: {
         flex: 1,
