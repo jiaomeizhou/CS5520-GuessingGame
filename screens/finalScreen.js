@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, Button, StyleSheet, Image } from 'react-native';
 import Header from '../components/Header';
 import Card from '../components/Card';
+import * as colors from '../components/color.js';
 
 export default function FinalScreen({ number, numberToGuess, onRestart }) {
     const [isWin, setIsWin] = useState(false);
@@ -41,13 +42,13 @@ export default function FinalScreen({ number, numberToGuess, onRestart }) {
                 <Header gameStarted={false} />
                 <Card>
                     <View>
-                        <Text>Here's your picture</Text>
+                        <Text style={styles.title}>Here's your picture</Text>
                         {isWin ? (
                             <Image style={styles.image} source={{ uri: getImageUrl() }} />
                         ) : (
                             <Image style={styles.sadFace} source={getImageUrl()} />
                         )}
-                        <Text style={styles.title}>{isWin ? 'You won!' : 'You lost!'}</Text>
+                        {/* <Text style={styles.title}>{isWin ? 'You won!' : 'You lost!'}</Text> */}
                         <Button title="Start Again" onPress={handleRestart} />
                     </View>
                 </Card>
@@ -69,23 +70,22 @@ const styles = StyleSheet.create({
         color: 'purple',
         marginBottom: 20,
     },
-    card: {
-        backgroundColor: '#a6a6a6',
-        padding: 20,
-        borderRadius: 10,
-        width: 300,
-        maxWidth: '80%',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     sadFace: {
         width: 100,
         height: 100,
         marginBottom: 20,
+        alignSelf: 'center',
     },
     image: {
         width: 100,
         height: 100,
         marginBottom: 20,
+        alignSelf: 'center',
+    },
+    title: {
+        fontSize: 28,
+        color: colors.titleColor,
+        marginBottom: 20,
+        alignSelf: 'center',
     },
 });

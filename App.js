@@ -71,17 +71,17 @@ export default function App() {
 
   if (isGameStarted && !isGameOver && attemptsLeft > 0) {
     return (
-      <View style={styles.container}>
-        <GameScreen
-          name={name}
-          number={number}
-          numberToGuess={numberToGuess}
-          attemptsLeft={attemptsLeft}
-          modalVisible={isGameStarted}
-          onContinue={continueGameHandler}
-          onFinish={gameResultHandler} />
-        <StatusBar style="auto" />
-      </View>
+        <View style={styles.container}>
+          <GameScreen
+            name={name}
+            number={number}
+            numberToGuess={numberToGuess}
+            attemptsLeft={attemptsLeft}
+            modalVisible={isGameStarted}
+            onContinue={continueGameHandler}
+            onFinish={gameResultHandler} />
+          <StatusBar style="auto" />
+        </View>
     );
   }
 

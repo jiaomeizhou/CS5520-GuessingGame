@@ -24,11 +24,11 @@ export default function GameScreen({ name, number, numberToGuess, attemptsLeft, 
     function guessHandler(attemptsLeft) {
         if (number === numberToGuess.toString()) {
             setIsWin(true);
-            setFeedback(`Congrats! ${name} You won!\n`);
+            setFeedback(`Congrats! ${name}! You won!\n`);
         } else {
             console.log("correct number:" + numberToGuess);
             const hint = number < numberToGuess ? 'Guess higher!' : 'Guess lower!';
-            setFeedback(`Hello ${name}\nYou have chosen ${number} That's not my number! ${hint} ${attemptsLeft > 0 ? `You have ${attemptsLeft} attempts left.` : `You have no attempts left.`}`);
+            setFeedback(`Hello ${name}\n You have chosen ${number}\n That's not my number!\n ${hint}\n ${attemptsLeft > 0 ? `You have ${attemptsLeft} attempts left!` : `You have no attempts left!`}`);
         }
     };
 
@@ -46,17 +46,17 @@ export default function GameScreen({ name, number, numberToGuess, attemptsLeft, 
         <Modal visible={modalVisible}>
             <View style={styles.container}>
                 <Card>
-                    <View style={styles.card}>
-                        <Text>{feedback}</Text>
-                        {isWin ? (
-                            <Button title="Thank you!" onPress={onFinish} />
-                        ) : (
-                            <>
-                                <Button title="I am done" onPress={onFinish} />
-                                <Button title="Let me guess again" onPress={continueGameHandler} disabled={attemptsLeft < 1} />
-                            </>
-                        )}
-                    </View>
+                <View >
+                    <Text style={styles.text}>{feedback}</Text>
+                    {isWin ? (
+                        <Button title="Thank you!" onPress={onFinish} />
+                    ) : (
+                        <>
+                            <Button title="I am done" onPress={onFinish} />
+                            <Button title="Let me guess again" onPress={continueGameHandler} disabled={attemptsLeft <= 1} />
+                        </>
+                    )}
+                </View>
                 </Card>
             </View>
         </Modal>
@@ -78,6 +78,13 @@ const styles = StyleSheet.create({
         fontSize: 24,
         marginBottom: 20,
         color: colors.titleColor,
+    },
+    text: {
+        fontSize: 20,
+        marginBottom: 10,
+        color: colors.labelColor,
+        alignSelf: 'center',
+        textAlign: 'center',
     },
     card: {
         backgroundColor: colors.cardBackground,

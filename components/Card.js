@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
         padding: 20,
         margin: 20,
         width: '70%',
-        height: '50%',
         shadowColor: colors.shadowColor,
         shadowOffset: {
             width: 0,
