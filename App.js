@@ -15,13 +15,10 @@ export default function App() {
   const [attemptsLeft, setAttemptsLeft] = useState(2);
 
 
-  console.log('initial attempts:' + attemptsLeft)
-
-  function startGameHandler(name, number, attempts) {
+  function startGameHandler(name, number) {
     setName(name);
     setNumber(number);
     setIsGameStarted(true);
-    setNumberToGuess(Math.floor(Math.random() * 10) + 1020);
     setAttemptsLeft(attemptsLeft);
     console.log('Game started');
     console.log('name+number:' + name, number);
@@ -42,7 +39,6 @@ export default function App() {
     setAttemptsLeft(2);
     setName('');
     setNumber('');
-    setNumberToGuess(Math.floor(Math.random() * 10) + 1020);
     setIsWin(false);
     setIsGameOver(true);
     setIsGameStarted(false);
@@ -52,14 +48,13 @@ export default function App() {
   function restartGameHandler() {
     setIsGameStarted(false);
     setIsGameOver(false);
-    setNumber('');
     setAttemptsLeft(3);
-    setNumberToGuess(Math.floor(Math.random() * 10) + 1020);
+    setNumber('');
     console.log('Game restarted');
   }
 
 
-  if (!isGameStarted && !isGameOver) {
+  if (!isGameStarted && !isGameOver && attemptsLeft > 0) {
     return (
       <View style={styles.container}>
         <StartScreen onStart={startGameHandler} />
@@ -68,7 +63,7 @@ export default function App() {
     );
   }
 
-  if (isGameStarted && !isGameOver) {
+  if (isGameStarted && !isGameOver && attemptsLeft > 0) {
     return (
       <View style={styles.container}>
         <GameScreen

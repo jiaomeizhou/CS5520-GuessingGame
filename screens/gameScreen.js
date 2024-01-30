@@ -20,8 +20,9 @@ export default function GameScreen({ name, number, numberToGuess, attemptsLeft, 
 
     console.log("attempt left111:" + attemptsLeft);
 
-    function guessHandler() {
+    function guessHandler(attemptsLeft) {
         if (number === numberToGuess.toString()) {
+            setIsWin(true);
             setFeedback(`Congrats! ${name} You won!\n`);
         } else {
             console.log("correct number:" + numberToGuess);
@@ -29,10 +30,6 @@ export default function GameScreen({ name, number, numberToGuess, attemptsLeft, 
             setFeedback(`Hello ${name}\nYou have chosen ${number} That's not my number! ${hint} ${attemptsLeft > 0 ? `You have ${attemptsLeft} attempts left.` : ''}`);
         }
     };
-
-    function getAttempts() {
-        return attemptsLeft;
-    }
 
     console.log("new attempts:" + attemptsLeft + name + number + numberToGuess);
 
